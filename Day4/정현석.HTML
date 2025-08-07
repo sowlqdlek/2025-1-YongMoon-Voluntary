@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>정현석의 블로그</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container" id="main-content">
+    <header>
+      <h1>정현석의 블로그</h1>
+      <p>배우고 나누는 개발자의 성장일지</p>
+    </header>
+
+    <section class="card">
+      <div class="profile-info"><strong>이름:</strong> 정현석</div>
+      <div class="profile-info"><strong>나이:</strong> 17세</div>
+      <div class="intro">
+        안녕하세요! 저는 새로운 기술과 창의적인 도전을 좋아하는 개발 지망생입니다.  
+        이 블로그는 저의 성장 여정을 담고 있으며, 함께 배워나갈 수 있는 공간이 되기를 바랍니다.
+      </div>
+    </section>
+
+    <section class="card recent-posts">
+      <h2>📌 최근 게시글</h2>
+
+      <div class="post" data-post="dream" tabindex="0">
+        <div class="post-title">나의 꿈</div>
+        <div class="post-content">
+          제가 꾸는 꿈은 미래에 사람들에게 도움이 되는 기술을 만드는 개발자가 되는 것입니다.
+        </div>
+      </div>
+
+      <div class="post" data-post="goal" tabindex="0">
+        <div class="post-title">올해 나의 목표</div>
+        <div class="post-content">
+          올해는 꾸준히 공부해서 웹사이트 하나를 스스로 만들고, 블로그도 지속적으로 운영하는 것이 목표입니다.
+        </div>
+      </div>
+
+      <div class="post" data-post="hobby" tabindex="0">
+        <div class="post-title">나의 취미</div>
+        <div class="post-content">
+          취미로는 독서와 걷기를 즐깁니다. 코딩도 어느 순간부터는 취미처럼 재미를 느끼고 있어요.
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 게시글 상세 페이지 영역 -->
+  <div class="container post-detail" id="post-dream">
+    <h1>나의 꿈</h1>
+    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="꿈을 향한 비전 이미지" />
+    <p>제가 꾸는 꿈은 미래에 사람들에게 도움이 되는 기술을 만드는 개발자가 되는 것입니다.<br/>
+    세상을 더 나은 곳으로 바꾸는 따뜻한 소프트웨어를 만드는 기술자가 되고 싶습니다.<br/>
+    그래서 끊임없이 배우고 도전하는 개발자가 되기 위해 노력하고 있습니다.</p>
+    <a class="back-link" onclick="showMain()">← 블로그 메인으로 돌아가기</a>
+  </div>
+
+  <div class="container post-detail" id="post-goal">
+    <h1>올해 나의 목표</h1>
+    <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80" alt="목표 달성을 위한 계획 다이어리 이미지" />
+    <p>올해는 꾸준히 공부해서 웹사이트 하나를 스스로 만들고, 블로그도 지속적으로 운영하는 것이 목표입니다.<br/>
+    매일 작은 목표를 세우고 실천하면서 성장해나가려 노력하고 있습니다.<br/>
+    꾸준함이 결국 큰 변화를 만든다고 믿습니다.</p>
+    <a class="back-link" onclick="showMain()">← 블로그 메인으로 돌아가기</a>
+  </div>
+
+  <div class="container post-detail" id="post-hobby">
+    <h1>나의 취미</h1>
+    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="산책하며 음악 듣는 모습 이미지" />
+    <p>취미로는 음악 듣기와 게임을 즐깁니다.<br/>
+    하루의 끝에 음악을 들으며 누워 있는게 저의 가장 큰 힐링이에요.<br/>
+    그 조용한 순간들이 제겐 가장 특별하게 느껴집니다.<br/>
+    코딩도 어느 순간부터는 취미처럼 재미를 느끼고 있습니다.</p>
+    <a class="back-link" onclick="showMain()">← 블로그 메인으로 돌아가기</a>
+  </div>
+
+  <script>
+    const posts = document.querySelectorAll('.post');
+    const mainContent = document.getElementById('main-content');
+    const postDetails = {
+      dream: document.getElementById('post-dream'),
+      goal: document.getElementById('post-goal'),
+      hobby: document.getElementById('post-hobby')
+    };
+
+    posts.forEach(post => {
+      post.addEventListener('click', () => {
+        mainContent.style.display = 'none';
+        Object.values(postDetails).forEach(div => div.classList.remove('active'));
+        const postKey = post.getAttribute('data-post');
+        postDetails[postKey].classList.add('active');
+        window.scrollTo(0, 0);
+      });
+      // 키보드 접근성 추가 (엔터키로도 클릭 가능)
+      post.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' ') {
+          post.click();
+        }
+      });
+    });
+
+    function showMain() {
+      Object.values(postDetails).forEach(div => div.classList.remove('active'));
+      mainContent.style.display = 'block';
+      window.scrollTo(0, 0);
+    }
+  </script>
+</body>
+</html>
